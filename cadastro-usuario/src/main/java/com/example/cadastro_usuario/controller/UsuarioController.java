@@ -5,6 +5,8 @@ import com.example.cadastro_usuario.infrastructure.entitys.Usuario;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -19,6 +21,12 @@ public class UsuarioController {
     public ResponseEntity<Void> cadastrarUsuario(@RequestBody Usuario usuario){
         usuarioService.save(usuario);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/listar")
+    public ResponseEntity<List<Usuario>> listarUsuarios(){
+        List<Usuario> usuarios = usuarioService.listarUsuarios();
+        return ResponseEntity.ok().body(usuarios);
     }
 
     @GetMapping
@@ -40,6 +48,8 @@ public class UsuarioController {
         usuarioService.atualizarUsuarioporId(id, usuario);
         return ResponseEntity.ok().build();
     }
+
+
 
 
 }

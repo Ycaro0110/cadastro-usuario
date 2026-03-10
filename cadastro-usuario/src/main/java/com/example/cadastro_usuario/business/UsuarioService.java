@@ -5,6 +5,9 @@ import com.example.cadastro_usuario.infrastructure.repository.UsuarioRepository;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UsuarioService {
 
@@ -15,6 +18,9 @@ public class UsuarioService {
     }
 
     public void save(Usuario usuario) {
+        if (usuario.getNome() == null) {
+            throw new RuntimeException("nome obrigatorio");
+        }
         usuarioRepository.saveAndFlush(usuario);
     }
 
@@ -37,4 +43,9 @@ public class UsuarioService {
 
         usuarioRepository.saveAndFlush(usuarioAtualizado);
     }
+
+      public List<Usuario> listarUsuarios(){
+        
+        return usuarioRepository.findAll();
+     }
 }
